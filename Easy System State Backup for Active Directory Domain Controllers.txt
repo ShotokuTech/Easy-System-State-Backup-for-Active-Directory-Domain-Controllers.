@@ -1,0 +1,12 @@
+REM Easy System State Backup for Active Directory Domain Controllers
+REM This script is part of the larger domain controller build script
+
+md c:\Temp
+
+pushd c:\Temp
+
+xcopy \\TUS-DC1\c$\Temp
+
+install_wbadmin.bat
+
+schtasks /create /tn "systemstate" /tr c:\Temp\systemstate.bat /sc daily /st 23:00:00
